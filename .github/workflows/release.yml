@@ -4,7 +4,11 @@ on: [push]
 
 jobs:
   build:
+    permissions:
+      contents: write
+
     runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -32,8 +36,6 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
-      permissions:
-        contents: write
       with:
         files: |
           mllp-client-${{ github.ref_name}}_linux_x86_64.tar.gz
