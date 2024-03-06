@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net"
+	"strings"
 	"os"
 )
 
@@ -67,7 +68,8 @@ func Send(file *string, host *string, port *int) {
 		fmt.Println("Handling server reply failed:", err.Error())
 		os.Exit(1)
 	}
-
+	formattedReply := strings.Replace(string(reply), "\r", "\n", -1)
+	fmt.Println(formattedReply)
 	fmt.Println("Done!")
 }
 
